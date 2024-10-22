@@ -43,12 +43,12 @@ loop_start:
     bge t1, a2, loop_end
     mul t4, t1, s3
     slli t4, t4, 2
-    addi t4, t4, s0
+    add t4, t4, s0
     lw t2, 0(t4)
 
     mul t4, t1, s4
     slli t4, t4, 2
-    addi t4, t4, s1
+    add t4, t4, s1
     lw t3, 0(t4)
 
     mul t2, t2, t3
