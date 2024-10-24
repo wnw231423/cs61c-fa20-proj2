@@ -199,11 +199,10 @@ class TestMatmul(TestCase):
         t.input_array("a6", array_out)
         # call the matmul function
         t.call("matmul")
-        # check the content of the output array
-        t.check_array(array_out, result)
-
         # generate the assembly file and run it through venus, we expect the simulation to exit with code `code`
         t.execute(code = code)
+        # check the content of the output array
+        t.check_array(array_out, result)
 
     def test_simple(self):
         self.do_matmul(
