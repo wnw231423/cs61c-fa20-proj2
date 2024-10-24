@@ -81,7 +81,7 @@ inner_loop_start:
     lw t2, 8(sp)
     lw t3, 12(sp)
     lw t4, 16(sp)
-    addi sp, sp, -20
+    addi sp, sp, 20
 
     slli t5, t2, 2
     add t5, t5, s6
