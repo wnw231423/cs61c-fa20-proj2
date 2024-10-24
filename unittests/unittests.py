@@ -218,6 +218,13 @@ class TestMatmul(TestCase):
             [22, 28, 49, 64]
          )
 
+    def test_more(self):
+        self.do_matmul(
+            [1, 2, 3, 4, 5, 6, 7, 8, 9], 3, 3,
+            [1, 3, 5, 7, 9, 11, 13, 15, 17], 3, 3,
+            [54, 66, 78, 117, 147, 177, 180, 228, 276]
+         )
+
     def test_invalid_input_not_match(self):
         self.do_matmul(
             [1, 2, 3, 4], 2, 2,
@@ -346,14 +353,32 @@ class TestClassify(TestCase):
         ref_file = "outputs/test_basic_main/reference0.bin"
         args = ["inputs/simple0/bin/m0.bin", "inputs/simple0/bin/m1.bin",
                 "inputs/simple0/bin/inputs/input0.bin", out_file]
+        t.input_scalar("a2", 0)
+        # call classify function
+        t.call("classify")
+        # generate assembly and pass program arguments directly to venus
+        t.execute(args=args)
+        # compare the output file and
+        t.check_file_output(out_file, ref_file)
+        # compare the classification output with `check_stdout`
+        t.check_stdout("2")
+
+    def test_simple0_input1(self):
+        t = self.make_test()
+        out_file = "outputs/test_basic_main/student1.bin"
+        ref_file = "outputs/test_basic_main/reference1.bin"
+        args = ["inputs/simple1/bin/m0.bin", "inputs/simple1/bin/m1.bin",
+                "inputs/simple1/bin/inputs/input0.bin", out_file]
+        t.input_scalar("a2", 0)
         # call classify function
         t.call("classify")
         # generate assembly and pass program arguments directly to venus
         t.execute(args=args)
 
         # compare the output file and
+        t.check_file_output(out_file, ref_file)
         # compare the classification output with `check_stdout`
-        t.check_stdout("2")
+        t.check_stdout("1")
 
     @classmethod
     def tearDownClass(cls):

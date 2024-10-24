@@ -56,7 +56,10 @@ matmul:
 outer_loop_start:
     bge t0, s1, outer_loop_end
     addi t1, x0, 0  # inner loop counter
+    
     mul t3, t0, s2  # m1's vector start point
+    slli t3, t3, 2
+    add t3, t3, s0
 inner_loop_start:
     bge t1, s5, inner_loop_end
     add t4, t1, s3  # m2's vector start point
@@ -65,7 +68,7 @@ inner_loop_start:
     mv a1, t4
     mv a2, s2
     addi a3, x0, 1
-    mv a4, s4
+    mv a4, s5
     
     addi sp, sp, -20
     sw t0, 0(sp)
