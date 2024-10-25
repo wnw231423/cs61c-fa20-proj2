@@ -170,6 +170,23 @@ classify:
 end:
     mv a0, s11
     
+    #  do free
+    mv a0, s3  # free rows and cols array
+    jal ra, free
+    mv a0, s8  #  free m0 m1 input cols and cols array
+    jal ra, free
+    mv a0, s5  #  free m0
+    jal ra, free
+    mv a0, s6  #  free m1
+    jal ra, free
+    mv a0, s7  #  free input
+    jal ra, free
+    mv a0, s9 #  free m0*input
+    jal ra, free
+    mv a0, s10  #  free m1*relu(m0*input)  
+    jal ra, free
+    
+    
     # episode
     lw ra, 0(sp)
     lw s0, 4(sp)
